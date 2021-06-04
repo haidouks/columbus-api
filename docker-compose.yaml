@@ -1,0 +1,18 @@
+version: '3.1'
+
+networks:
+  monitor-net:
+    driver: bridge
+
+services:
+  infra-api:
+    build: 
+      context: ./
+      dockerfile: Dockerfile.local    
+    networks:
+      - monitor-net
+    ports:
+    - '80:8000'
+    restart: always
+    environment:
+    - WEB_CONCURRENCY=5

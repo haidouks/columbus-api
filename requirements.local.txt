@@ -1,0 +1,4 @@
+fastapi
+typing
+uvicorn[standard]
+starlette_prometheus
