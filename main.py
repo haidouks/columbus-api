@@ -9,23 +9,23 @@ from api.v1.api import api_router
 tags_metadata = [
   {
       "name": "Virtualization",
-      "description": "Operations related to Virtualization Category",
+      "description": "Automations related to Virtualization",
   },
   {
       "name": "Openshift",
-      "description": "Operations related to Openshift",
+      "description": "Automations related to Openshift",
   },
   {
       "name": "Storage",
-      "description": "Operations related to Storage",
+      "description": "Automations related to Storage",
   },
   {
       "name": "Monitoring",
-      "description": "Operations related to Storage",
+      "description": "Automations related to Storage",
   },
   {
       "name": "Catalog",
-      "description": "Discover Turkcell's Automation Operations Catalog",
+      "description": "Discover Turkcell's Automation Catalog",
   },
 ]
 
@@ -33,9 +33,9 @@ def custom_openapi():
     if app.openapi_schema:
         return app.openapi_schema
     openapi_schema = get_openapi(
-        title="IaC-API", 
+        title="Turkcell Automation API", 
         version="1.0.0",
-        description="Turkcell Infrastructure as Code API",  
+        description="This API aims to connect any infrastructure automation to consumer in a standardized declarative way.",  
         routes=app.routes,
         tags=tags_metadata
     )
