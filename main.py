@@ -35,7 +35,7 @@ def custom_openapi():
     openapi_schema = get_openapi(
         title="Turkcell Automation API", 
         version="1.0.0",
-        description="This API aims to connect any infrastructure automation to consumer in a standardized declarative way.",  
+        description="Automation API aims to connect any infrastructure automation to consumer in a standardized declarative way.",  
         routes=app.routes,
         tags=tags_metadata
     )
