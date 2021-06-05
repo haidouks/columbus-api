@@ -15,7 +15,7 @@ def list_catalog_items(request: Request) -> Any:
     for route in request.app.routes:
         if hasattr(route, "tags"):
             firstTag = route.tags[0]
-            if firstTag not in result and firstTag != "catalog":
+            if firstTag not in result and firstTag != "Catalog":
                 result.append(firstTag)
     return {'catalogs': result}
 
