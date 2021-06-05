@@ -6,7 +6,7 @@ class Catalog_Items_Response(BaseModel):
 
 class Automation_Items_Response(BaseModel):
     catalog: str = Field(..., description="Catalog item", example="openshift")
-    automations: List[str] = Field(..., description="List of catalog items", example=['new_project', 'new_user', 'set_quota', '...'])
+    automations: List[str] = Field(..., description="Automation list for specified catalog", example=['new_project', 'new_user', 'set_quota', '...'])
 
 class Automation_Detail_Response(BaseModel):
     catalog: str = Field(..., description="Catalog item", example="openshift")

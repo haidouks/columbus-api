@@ -9,7 +9,7 @@ router = APIRouter()
 @router.get('/', response_model=routerSchemas.Catalog_Items_Response)
 def list_catalog_items(request: Request) -> Any:
     """
-    This endpoint returns the names of all available catalog items
+    Returns the names of all available catalog items
     """
     result = []
     for route in request.app.routes:
@@ -26,9 +26,7 @@ def list_automations_for_specified_catalog(
     catalogName: str = Path(..., description="Catalog Name")
 ) -> Any:
     """
-    This endpoint returns the list of all available automations for the specified catalog name
-
-    :param item: User input.
+    Returns the list of all available automations for the specified catalog name
     """
     result = []
     for route in request.app.routes:
@@ -46,7 +44,9 @@ def get_automation_request_detail(
     catalogName: str = Path(..., description="Catalog Name"),
     automationName: str = Path(..., description="Automation Name")
 ) -> Any:
-
+    """
+    Returns required information to invoke the specified automation
+    """
     result = {}
     for route in request.app.routes:
         if hasattr(route, "tags"):
