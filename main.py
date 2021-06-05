@@ -37,6 +37,7 @@ def custom_openapi():
         version="1.0.0",
         description="Turkcell Infrastructure as Code API",  
         routes=app.routes,
+        tags=tags_metadata
     )
     openapi_schema["info"]["x-logo"] = {
         "url": "https://s.turkcell.com.tr/SiteAssets/Hakkimizda/genel-bakis/logolarimiz/TURKCELL_DIKEY_ERKEK_LOGO.png"
@@ -46,7 +47,6 @@ def custom_openapi():
 
 app = FastAPI(
     openapi_url=f"/api/v1/openapi.json",
-    openapi_tags=tags_metadata,
 )
 app.openapi = custom_openapi
 
