@@ -33,9 +33,9 @@ def custom_openapi():
     if app.openapi_schema:
         return app.openapi_schema
     openapi_schema = get_openapi(
-        title="Turkcell Automation API", 
+        title="Turkcell Columbus-API", 
         version="1.0.0",
-        description="Automation API aims to connect any infrastructure automation to consumer in a standardized declarative way.",  
+        description="Columbus-API aims to connect any infrastructure automation to consumer in a standardized declarative way.",  
         routes=app.routes,
         tags=tags_metadata
     )

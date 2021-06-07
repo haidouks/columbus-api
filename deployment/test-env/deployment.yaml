@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: columbus-api
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: columbus-api
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftWebConsole
+      creationTimestamp: null
+      labels:
+        app: columbus-api
+        deploymentconfig: columbus-api
+    spec:
+      containers:
+      - image: artifactory.turkcell.com.tr/local-docker-dist-dev/com/turkcell/object-storage/columbus-api:2.3.0
+        imagePullPolicy: Always
+        name: columbus-api
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        resources: {}
+        env:
+        - name: WEB_CONCURRENCY
+          value: "5"
+        - name: USER_INFO
+          valueFrom:
+                secretKeyRef:
+                  name: columbus-api-secrets
+                  key: USER_INFO
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

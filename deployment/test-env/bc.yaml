@@ -1,0 +1,45 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: columbus-api
+  namespace: cloud-operations
+  labels:
+    app:  columbus-api
+    build:  columbus-api
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: DockerImage
+      name: artifactory.turkcell.com.tr/local-docker-dist-dev/com/turkcell/object-storage/columbus-api:2.3.0
+    pushSecret:
+      name: jenkins-artifactory
+  resources:
+    limits:
+      cpu: 750m
+      memory: 1Gi
+    requests:
+      cpu: 50m
+      memory: 512Mi
+  successfulBuildsHistoryLimit: 3
+  failedBuildsHistoryLimit: 3
+  strategy:
+    type: Docker
+    dockerStrategy:
+      pullSecret:
+        name: jenkins-artifactory
+      dockerfilePath: Dockerfile
+  postCommit: {}
+  source:
+    type: Git
+    git:
+      uri: https://stash.turkcell.com.tr/git/scm/SV197737/columbus-api.git
+      ref: master
+    sourceSecret:
+      name: jenkins-git
+  runPolicy: Serial
+  triggers:
+  - type: "Bitbucket"
+    bitbucket:
+      secretReference:
+        name: "columbus-api-secrets"

@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: columbus-api
+    app.kubernetes.io/component: columbus-api
+    app.kubernetes.io/instance: columbus-api
+    app.openshift.io/runtime-version: latest
+  name: columbus-api
+spec:
+  ports:
+    - name: 8080-tcp
+      port: 8080
+      protocol: TCP
+      targetPort: 8000
+  selector:
+    app: columbus-api
+    deploymentconfig: columbus-api
+  sessionAffinity: None
+  type: ClusterIP

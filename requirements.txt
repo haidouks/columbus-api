@@ -1,0 +1,5 @@
+--index-url https://artifactory.turkcell.com.tr/artifactory/api/pypi/virtual-pypi/simple
+fastapi
+typing
+uvicorn[standard]
+starlette_prometheus
