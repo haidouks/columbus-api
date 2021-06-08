@@ -1,0 +1,21 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: konga
+    app.kubernetes.io/component: konga
+    app.kubernetes.io/instance: konga
+    app.openshift.io/runtime-version: latest
+  name: konga
+spec:
+  host: konga-cloud-operations.apps.tocpt2.tcs.turkcell.tgc
+  port:
+    targetPort: 1337-tcp
+  to:
+    kind: Service
+    name: konga
+    weight: 100
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None

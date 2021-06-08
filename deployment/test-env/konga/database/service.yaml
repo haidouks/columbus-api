@@ -1,0 +1,16 @@
+kind: "Service"
+apiVersion: "v1"
+metadata:
+  name: konga-database
+  labels:
+    name: konga-database
+spec:
+  ports:
+    - name: 27017-tcp
+      protocol: "TCP"
+      port: 27017
+      targetPort: 27017
+  selector:
+    app: konga-database
+  type: "ClusterIP"
+  sessionAffinity: "None"

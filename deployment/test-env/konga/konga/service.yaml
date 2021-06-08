@@ -1,0 +1,16 @@
+kind: "Service"
+apiVersion: "v1"
+metadata:
+  name: konga
+  labels:
+    name: konga
+spec:
+  ports:
+    - name: 1337-tcp
+      protocol: "TCP"
+      port: 1337
+      targetPort: 1337
+  selector:
+    app: konga
+  type: "ClusterIP"
+  sessionAffinity: "None"

@@ -1,0 +1,16 @@
+kind: "Service"
+apiVersion: "v1"
+metadata:
+  name: kong-postgresql
+  labels:
+    name: kong-postgresql
+spec:
+  ports:
+    - name: 5432-tcp
+      protocol: "TCP"
+      port: 5432
+      targetPort: 5432
+  selector:
+    app: kong-postgresql
+  type: "ClusterIP"
+  sessionAffinity: "None"

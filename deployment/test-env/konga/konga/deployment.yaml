@@ -1,0 +1,93 @@
+#test env user info
+#user:admin
+#pass:Demo123
+#https://github.com/pantsel/konga
+#https://github.com/mvilche/kong-api-gateway-openshift/tree/master/konga
+apiVersion: v1
+data:
+  env: |-
+    PORT=1337
+    NODE_ENV=production
+    KONGA_HOOK_TIMEOUT=120000
+    DB_ADAPTER=mongo
+    DB_URI=mongodb://konga-database:27017/konga
+    KONGA_LOG_LEVEL=warn
+    TOKEN_SECRET=Demo123
+kind: ConfigMap
+metadata:
+  name: konga-config
+---
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: konga
+  name: konga
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    app: konga
+    deploymentconfig: konga
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      labels:
+        app: konga
+        deploymentconfig: konga
+    spec:
+      containers:
+        - env:
+            - name: WAITFOR_HOST
+              value: konga-database
+            - name: WAITFOR_PORT
+              value: '27017'
+          image: "quay.io/cnsn/konga-openshift:latest"
+          imagePullPolicy: Always
+          name: konga
+          ports:
+            - containerPort: 1337
+              protocol: TCP                                         
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 60
+            periodSeconds: 20
+            successThreshold: 1
+            httpGet:
+              port: 1337
+              path: /
+            timeoutSeconds: 15
+          readinessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 60
+            periodSeconds: 20
+            successThreshold: 1
+            httpGet:
+              port: 1337
+              path: /
+            timeoutSeconds: 15
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /opt/konga/custom_config
+              name: konga-config
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - configMap:
+            name: konga-config
+          name: konga-config
+  test: false
+  triggers:
+    - type: ConfigChange
