@@ -8,7 +8,7 @@ metadata:
     app.openshift.io/runtime-version: latest
   name: kong
 spec:
-  host: kong-cloud-operations.apps.tocpt2.tcs.turkcell.tgc
+  host: columbus-gw-cloud-operations.apps.tocpt2.tcs.turkcell.tgc
   port:
     targetPort: 8000-tcp-kong
   to:
