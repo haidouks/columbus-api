@@ -24,7 +24,7 @@ spec:
         deploymentconfig: columbus-api
     spec:
       containers:
-      - image: artifactory.turkcell.com.tr/local-docker-dist-dev/com/turkcell/object-storage/columbus-api:2.3.0
+      - image: artifactory.turkcell.com.tr/local-docker-dist-dev/com/turkcell/object-storage/columbus-api:1.0.0
         imagePullPolicy: Always
         name: columbus-api
         ports:

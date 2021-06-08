@@ -11,7 +11,7 @@ spec:
   output:
     to:
       kind: DockerImage
-      name: artifactory.turkcell.com.tr/local-docker-dist-dev/com/turkcell/object-storage/columbus-api:2.3.0
+      name: artifactory.turkcell.com.tr/local-docker-dist-dev/com/turkcell/object-storage/columbus-api:1.0.0
     pushSecret:
       name: jenkins-artifactory
   resources:
