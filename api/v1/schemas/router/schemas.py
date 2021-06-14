@@ -9,7 +9,6 @@ class Monitoring_HealthCheck(BaseModel):
 class Monitoring_Message_Response(BaseModel):
     message: str = Field(..., description="Just a simple message")
 
-
 class Monitoring_Message_Request(BaseModel):
     reqbody: str = Field(..., description="Health check for db", example="sample req body")
     cnsn: str = Field(..., description="Health check for ceph", example="cnsnSampleData" )
